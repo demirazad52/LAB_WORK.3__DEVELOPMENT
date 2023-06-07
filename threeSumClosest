@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+int compare(const void* a, const void* b);
+
+int threeSumClosest(int* nums, int numsSize, int target) {
+    int closestSum = INT_MAX;
+
+    qsort(nums, numsSize, sizeof(int), compare);
+
+    for (int i = 0; i < numsSize - 2; i++) {
+        int left = i + 1;
+        int right = numsSize - 1;
+
+        while (left < right) {
+            int currentSum = nums[i] + nums[left] + nums[right];
+
+            if (currentSum == target) {
+                return currentSum;
+            }
+
+            if (abs(currentSum - target) < abs(closestSum - target)) {
+                closestSum = currentSum;
+            }
+
+            if (currentSum < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+    }
+
+    return closestSum;
+}
+
+int compare(const void* a, const void* b) {
+    return *(int*)a - *(int*)b;
+}
+
+int main() {
+    int numsSize;
+    printf("Enter the size of the array: ");
+    if (scanf("%d", &numsSize) != 1 || numsSize < 3) {
+        printf("Invalid array size. Exiting the program.\n");
+        return 0;
+    }
+
+    int* nums = (int*)malloc(numsSize * sizeof(int));
+    printf("Enter the elements of the array: ");
+    for (int i = 0; i < numsSize; i++) {
+        if (scanf("%d", &nums[i]) != 1) {
+            printf("Invalid input. Exiting the program.\n");
+            free(nums);
+            return 0;
+        }
+    }
+
+    int target;
+    printf("Enter the target sum: ");
+    if (scanf("%d", &target) != 1) {
+        printf("Invalid target sum. Exiting the program.\n");
+        free(nums);
+        return 0;
+    }
+
+    int result = threeSumClosest(nums, numsSize, target);
+    printf("Closest sum: %d\n", result);
+
+    free(nums);
+
+    return 0;
+}
