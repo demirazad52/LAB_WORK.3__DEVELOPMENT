@@ -6,7 +6,7 @@
 ## Three Sum Closest
 
 This code finds three integers in an array whose sum is closest to a given target. It provides a solution to the ["Three Sum Closest" problem](https://leetcode.com/problems/3sum-closest/) on LeetCode.
-
+Link: https://leetcode.com/problems/3sum-closest/
 ## Problem Description
 
 Given an integer array `nums` of length `n` and an integer `target`, the task is to find three integers in the array `nums` such that their sum is closest to the target value.
